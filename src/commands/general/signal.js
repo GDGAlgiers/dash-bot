@@ -28,7 +28,12 @@ module.exports = {
     // An action row only holds one text input,
     // so you need one action row per text input.
     const firstActionRow = new ActionRowBuilder().addComponents(teamNameInput);
-    const secondActionRow = new ActionRowBuilder().addComponents(problemInput);    
+    const secondActionRow = new ActionRowBuilder().addComponents(problemInput); 
+    // Add inputs to the modal
+		modal.addComponents(firstActionRow, secondActionRow);
+
+		// Show the modal to the user
+		await interaction.showModal(modal);   
     
     client.on('interactionCreate', async interaction => {
       if (!interaction.isModalSubmit()) return;
@@ -37,8 +42,11 @@ module.exports = {
       // Verify if teamName exists
       problem = interaction.fields.getTextInputValue('problemInput')
       console.log({teamName,problem})
-     
-      if (interaction.customId === 'myModal') {
+      // Modify here with the name of the organizers channel, set default to announcement -------------------------------------------------------
+      const organizers_channel = client.channels.cache.find(channel => channel.name === "announcement");
+      organizers_channel.send("Team : " + teamName + "\nProblem : " + problem)
+
+        if (interaction.customId === 'myModal') {
         await interaction.reply({ content: 'Your problem has been reported successfully!'});
       }
       
