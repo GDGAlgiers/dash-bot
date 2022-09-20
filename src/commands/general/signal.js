@@ -8,37 +8,40 @@ module.exports = {
       .setDescription('signal and report a problem to the organizers'),
   async execute(client, interaction, args) {
     
-      if (!interaction.isModalSubmit()) return;
-      if (interaction.customId === 'myModal') {
-        await interaction.reply({ content: 'Your submission was received successfully!' });
-      }
+    
     const modal =  new ModalBuilder()
         .setCustomId('myModal')
         .setTitle('My Modal');
-        const favoriteColorInput = new TextInputBuilder()
-        .setCustomId('team name input')
+        const teamNameInput = new TextInputBuilder()
+        .setCustomId('teamNameInput')
         // The label is the prompt the user sees for this input
         .setLabel("What's your team name?")
         // Short means only a single line of text
         .setStyle(TextInputStyle.Short);
 
-    const hobbiesInput = new TextInputBuilder()
-        .setCustomId('problem input')
+    const problemInput = new TextInputBuilder()
+        .setCustomId('problemInput')
         .setLabel("Describe the problem you're facing here")
         // Paragraph means multiple lines of text.
         .setStyle(TextInputStyle.Paragraph);
 
     // An action row only holds one text input,
     // so you need one action row per text input.
-    const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
-    const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
-
-    // Add inputs to the modal
-    modal.addComponents(firstActionRow, secondActionRow);  
-   
-    await interaction.showModal(modal);
-   
-
+    const firstActionRow = new ActionRowBuilder().addComponents(teamNameInput);
+    const secondActionRow = new ActionRowBuilder().addComponents(problemInput);    
     
+    client.on('interactionCreate', async interaction => {
+      if (!interaction.isModalSubmit()) return;
+      // Getting the modal submission info  
+      teamName = interaction.fields.getTextInputValue('teamNameInput')
+      // Verify if teamName exists
+      problem = interaction.fields.getTextInputValue('problemInput')
+      console.log({teamName,problem})
+     
+      if (interaction.customId === 'myModal') {
+        await interaction.reply({ content: 'Your problem has been reported successfully!'});
+      }
+      
+    });
   },
 };
