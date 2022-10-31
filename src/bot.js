@@ -5,7 +5,8 @@ const {loadCommands} = require('./core/loader/index');
 
 // Create a new client instance
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildMembers],
 });
 client.commands = new Collection();
 
