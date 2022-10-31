@@ -18,7 +18,6 @@ module.exports = {
         .setDescription('Member has been added')
         .setColor('0x7cfc00')
 
-    //console.log(interaction.member.roles);
     const CTF_role='1023234660500770859';
     const Leader_role='1023254250370895964';
   
@@ -28,7 +27,7 @@ module.exports = {
     await interaction.reply({
       embeds: [embed1],
     });           
-    //const user = interaction.options.getUser("new_member_name");
+
     const member = interaction.guild.members.cache.get(memid) || await interaction.guild.members.fetch(memid).catch(err => { });
     await  member.roles.add(role1).catch(console.error)
      }else{
