@@ -1,0 +1,71 @@
+/*const discord = require('discord.js');
+const {EmbedBuilder,PermissionFlagsBits,PermissionsBitField,} = require('discord.js');
+const {SlashCommandBuilder, messageLink} = require('@discordjs/builders');
+let i=0;
+
+module.exports = {
+  data: new SlashCommandBuilder()
+      .setName('team')
+      .setDescription('Creating a Team')
+      .addStringOption(option =>
+          option.setName('team_name')
+            .setDescription('organasing teams')
+            .setRequired(true)
+            ),
+  async execute(client, interaction, args)
+   {
+    const {roles}=interaction.member;
+    const guild = interaction.guild
+    const team_name = interaction.options.getString('team_name')
+    
+    //creating an embed
+    const embed1 = new EmbedBuilder()
+    .setAuthor( {name:'Team '+i+1,iconURL:"https://www.gdgalgiers.com/static/phonelogo-db9c725b1463afd46d9b886076124bb2.png"})
+    .setColor(0xFF0000)
+    .setTitle(team_name)
+    .setThumbnail(interaction.user.displayAvatarURL())
+    .setTimestamp(Date.now())
+    .setDescription("Team Leader <@" + interaction.user.id + ">")
+    .setImage("https://ctf.gdgalgiers.com/static/fcb34b6f8b7de11ab2a1678b8985573c/b1405/hero-img.png")
+    .setFooter({
+        iconURL:interaction.user.displayAvatarURL(),
+        text:"Team "+team_name+" Created by < "+interaction.user.tag+" > "
+    })
+     
+    //creating  2 roles   leader and member  : 
+    const role1= await interaction.guild.roles.create({
+      name:team_name+" Team Member",
+      color: 0xFF0000
+  })
+  const role2= await interaction.guild.roles.create({
+      name:team_name+' leader',
+      color: 'BLUE'
+  })
+  //giving roles to the user 
+  await roles.add((role1)).catch(console.error);
+  await roles.add((role2)).catch(console.error);    
+    //creating channels in a category
+    const catego_id='1022874680773840907';
+    const channel = await  interaction.guild.channels.create(
+       {  name:'just_for_test',
+          permissionOverwrites:[
+        {
+           id: interaction.guild.id,
+           deny:[PermissionsBitField.Flags.SendMessages]
+
+        },
+        {
+            id:role1.id,
+            allow:[PermissionsBitField.Flags.SendMessages]
+        }
+         ]
+           })        
+     i++;
+     
+    await interaction.reply({
+      embeds: [embed1],
+    });
+    // .catch((e) => interaction.followUp(e))      
+  },
+};
+*/
