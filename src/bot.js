@@ -3,9 +3,9 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { loadCommands } = require("./core/loader/index");
 require("dotenv").config();
 
-const clientId = process.config.CLIENT_ID;
-const guildId = process.config.GUILD_ID;
-const token = process.config.TOKEN;
+const clientId = process.env.CLIENT_ID;
+const guildId = process.env.GUILD_ID;
+const token = process.env.TOKEN;
 
 // Create a new client instance
 const client = new Client({
