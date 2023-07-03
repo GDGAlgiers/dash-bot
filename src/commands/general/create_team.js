@@ -40,6 +40,7 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(client, interaction, args) {
+    interaction.reply("Processing creation request");
     try {
       // Getting all the members of the team
       const teamLeader = interaction.member;
@@ -58,7 +59,7 @@ module.exports = {
         const role = member.roles.cache.find((r) => r.name.startsWith("Team"));
 
         if (role) {
-          interaction.reply("One of the team members is already in a team");
+          interaction.editReply("One of the team members is already in a team");
           return;
         }
       }
@@ -71,7 +72,7 @@ module.exports = {
       );
 
       if (role) {
-        await interaction.reply(
+        await interaction.editReply(
           `A team with the name of \`${name}\` already exists!`
         );
         return;
@@ -121,7 +122,7 @@ module.exports = {
       });
 
       await interaction.guild.channels.create({
-        name: `ask-mentor`,
+        name: `ask-help`,
         type: ChannelType.GuildVoice,
         parent: category.id,
         permissionOverwrites: [
@@ -138,25 +139,6 @@ module.exports = {
           },
           {
             id: "1125019398856527873",
-            allow: [
-              PermissionFlagsBits.ViewChannel,
-              PermissionFlagsBits.Connect,
-            ],
-          },
-        ],
-      });
-
-      await interaction.guild.channels.create({
-        name: `ask-organizer`,
-        type: ChannelType.GuildVoice,
-        parent: category.id,
-        permissionOverwrites: [
-          {
-            id: interaction.guild.id,
-            deny: [PermissionFlagsBits.ViewChannel],
-          },
-          {
-            id: createdRole.id,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.Connect,
@@ -192,7 +174,7 @@ module.exports = {
       });
 
       await interaction.guild.channels.create({
-        name: `ask-mentor`,
+        name: `ask-help`,
         type: ChannelType.GuildText,
         parent: category.id,
         permissionOverwrites: [
@@ -214,25 +196,6 @@ module.exports = {
               PermissionFlagsBits.SendMessages,
             ],
           },
-        ],
-      });
-
-      await interaction.guild.channels.create({
-        name: `ask-organizer`,
-        type: ChannelType.GuildText,
-        parent: category.id,
-        permissionOverwrites: [
-          {
-            id: interaction.guild.id,
-            deny: [PermissionFlagsBits.ViewChannel],
-          },
-          {
-            id: createdRole.id,
-            allow: [
-              PermissionFlagsBits.ViewChannel,
-              PermissionFlagsBits.SendMessages,
-            ],
-          },
           {
             id: "1097120206989570199",
             allow: [
@@ -247,10 +210,10 @@ module.exports = {
         `Welcome ${createdRole.toString()}, this is your team space`
       );
 
-      interaction.reply(`Team ${name} created successfully`);
+      interaction.editReply(`Team ${name} created successfully`);
     } catch (err) {
       console.log(err);
-      interaction.reply("There's an error, try to contact an admin");
+      interaction.editReply("There's an error, try to contact an admin");
     }
   },
 };
