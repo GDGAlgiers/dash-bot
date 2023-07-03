@@ -1,18 +1,22 @@
 const { askMentorModal } = require("../../modals/ask_mentor_modal");
+const { askOrganizerModal } = require("../../modals/ask_organizer_modal");
 
-const modalsHandler = (client, interaction) => {
+const modalsHandler = async (client, interaction) => {
   try {
     const customId = interaction.customId;
     switch (customId) {
       case "askMentor":
-        askMentorModal(client, interaction);
+        await askMentorModal(client, interaction);
+        break;
+      case "askOrganizer":
+        await askOrganizerModal(client, interaction);
         break;
       default:
         return;
     }
   } catch (err) {
     console.log(err);
-    interaction.reply("There was an error, try to contact an admin");
+    await interaction.reply("There was an error, try to contact an admin");
   }
 };
 
