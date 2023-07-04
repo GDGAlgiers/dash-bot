@@ -1,5 +1,10 @@
+const { EmbedBuilder } = require("discord.js");
+
 const askMentorModal = async (client, interaction) => {
-  const role = interaction.member.roles.cache.find((r) => r.name.startsWith("Team"));
+  await interaction.reply({ embeds: [{ title: "Processing mentor request" }] });
+  const role = interaction.member.roles.cache.find((r) =>
+    r.name.startsWith("Team")
+  );
 
   if (role) {
     const mentorTopic =
@@ -10,11 +15,36 @@ const askMentorModal = async (client, interaction) => {
     const channel = await interaction.guild.channels.fetch(
       "1125307317945122878"
     );
-    channel.send(`<@&1125019398856527873>\n${mentorTopic}\n${mentorDetails}\n${role.name}`);
 
-    interaction.reply("Request sent");
+    const message = new EmbedBuilder({
+      color: 0x0099ff,
+      title: "A team asked for a mentor",
+      fields: [
+        {
+          name: "Team name",
+          value: role.toString(),
+        },
+        {
+          name: "Topic",
+          value: mentorTopic,
+        },
+        {
+          name: "Description",
+          value: mentorDetails,
+        },
+      ],
+    });
+
+    await channel.send({
+      content: "<@&1125019398856527873>",
+      embeds: [message],
+    });
+
+    await interaction.editReply({ embeds: [{ title: "Request sent" }] });
   } else {
-    interaction.reply("You should be in a team first");
+    await interaction.editReply({
+      embeds: [{ title: "You should be in a team first" }],
+    });
   }
 };
 

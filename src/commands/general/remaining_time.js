@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -7,22 +7,52 @@ module.exports = {
       "Shows the remaining time for the event to start or to end"
     ),
   async execute(client, interaction, args) {
-    const startDate = new Date(2023, 6, 5, 17, 0);
-    const endDate = new Date(2023, 6, 10, 19, 0);
+    await interaction.reply({
+      embeds: [
+        {
+          title: "Calculating remaining time",
+        },
+      ],
+    });
+
+    const startDate = new Date(2023, 6, 5, 19, 0);
+    const endDate = new Date(2023, 6, 10, 21, 0);
     const currentDate = new Date();
+    const message = new EmbedBuilder();
 
     if (startDate - currentDate > 0) {
-      const difference = new Date(startDate - currentDate);
-      await interaction.reply(`
-        ${difference.getDate()} days ${difference.getHours()} hours ${difference.getMinutes()} minutes left for the event to start
-      `);
+      const diff = startDate.getTime() - currentDate.getTime();
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+      message
+        .setTitle("Time left for the event to start")
+        .setDescription(`${days} days ${hours} hours ${minutes} minutes`);
+
+      await interaction.editReply({ embeds: [message] });
     } else if (endDate - currentDate > 0) {
-      const difference = new Date(endDate - currentDate);
-      await interaction.reply(`
-        ${difference.getDate()} days ${difference.getHours()} hours ${difference.getMinutes()} minutes left for the event to end
-      `);
+      const diff = endDate.getTime() - currentDate.getTime();
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+      message
+        .setTitle("Time left for the event to end")
+        .setDescription(`${days} days ${hours} hours ${minutes} minutes`);
+
+      await interaction.editReply({ embeds: [message] });
     } else {
-      await interaction.reply("The event has ended");
+      message
+        .setTitle("The event has ended")
+        .setDescription("See you in the next edition");
+      await interaction.editReply({ embeds: [message] });
     }
   },
 };

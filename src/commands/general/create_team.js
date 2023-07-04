@@ -3,6 +3,7 @@ const {
   Colors,
   ChannelType,
   PermissionFlagsBits,
+  EmbedBuilder,
 } = require("discord.js");
 
 module.exports = {
@@ -40,7 +41,9 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(client, interaction, args) {
-    interaction.reply("Processing creation request");
+    await interaction.reply({
+      embeds: [{ title: "Processing team creation" }],
+    });
     try {
       // Getting all the members of the team
       const teamLeader = interaction.member;
@@ -59,7 +62,9 @@ module.exports = {
         const role = member.roles.cache.find((r) => r.name.startsWith("Team"));
 
         if (role) {
-          interaction.editReply("One of the team members is already in a team");
+          await interaction.editReply({
+            embeds: [{ title: "One of the team members is already in a team" }],
+          });
           return;
         }
       }
@@ -72,9 +77,11 @@ module.exports = {
       );
 
       if (role) {
-        await interaction.editReply(
-          `A team with the name of \`${name}\` already exists!`
-        );
+        await interaction.editReply({
+          embeds: [
+            { title: `A team with the name of \`${name}\` already exists!` },
+          ],
+        });
         return;
       }
 
@@ -206,14 +213,20 @@ module.exports = {
         ],
       });
 
-      textChannel.send(
+      await textChannel.send(
         `Welcome ${createdRole.toString()}, this is your team space`
       );
 
-      interaction.editReply(`Team ${name} created successfully`);
+      await interaction.editReply({
+        embeds: [
+          {
+            title: `Team \`${name}\` created successfully`,
+          },
+        ],
+      });
     } catch (err) {
       console.log(err);
-      interaction.editReply("There's an error, try to contact an admin");
+      await interaction.editReply("There's an error, try to contact an admin");
     }
   },
 };
