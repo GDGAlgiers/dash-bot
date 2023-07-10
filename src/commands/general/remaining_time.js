@@ -16,7 +16,7 @@ module.exports = {
     });
 
     const startDate = new Date(2023, 6, 5, 18, 0);
-    const endDate = new Date(2023, 6, 10, 20, 0);
+    const endDate = new Date(2023, 6, 11, 0, 0);
     const currentDate = new Date();
     const message = new EmbedBuilder();
 
