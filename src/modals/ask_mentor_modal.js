@@ -1,4 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
+require("dotenv").config()
+
+const MENTOR_ROLE_ID = process.env.MENTOR_ROLE_ID
+const MENTOR_CHANNEL_ID = process.env.MENTOR_CHANNEL_ID
 
 const askMentorModal = async (client, interaction) => {
   await interaction.reply({ embeds: [{ title: "Processing mentor request" }] });
@@ -12,9 +16,7 @@ const askMentorModal = async (client, interaction) => {
     const mentorDetails =
       interaction.fields.getTextInputValue("mentorDetailsInput");
 
-    const channel = await interaction.guild.channels.fetch(
-      "1125307317945122878"
-    );
+    const channel = await interaction.guild.channels.fetch(MENTOR_CHANNEL_ID);
 
     const message = new EmbedBuilder({
       color: 0x0099ff,
@@ -36,7 +38,7 @@ const askMentorModal = async (client, interaction) => {
     });
 
     await channel.send({
-      content: "<@&1125019398856527873>",
+      content: `<@&${MENTOR_ROLE_ID}>`,
       embeds: [message],
     });
 

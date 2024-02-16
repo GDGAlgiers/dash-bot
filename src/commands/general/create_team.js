@@ -2,9 +2,12 @@ const {
   SlashCommandBuilder,
   Colors,
   ChannelType,
-  PermissionFlagsBits,
-  EmbedBuilder,
+  PermissionFlagsBits
 } = require("discord.js");
+require("dotenv").config()
+
+const MENTOR_ROLE_ID = process.env.MENTOR_ROLE_ID
+const ORGANIZER_ROLE_ID = process.env.ORGANIZER_ROLE_ID
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -145,14 +148,14 @@ module.exports = {
             ],
           },
           {
-            id: "1125019398856527873",
+            id: ORGANIZER_ROLE_ID,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.Connect,
             ],
           },
           {
-            id: "1097120206989570199",
+            id: MENTOR_ROLE_ID,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.Connect,
@@ -197,14 +200,14 @@ module.exports = {
             ],
           },
           {
-            id: "1125019398856527873",
+            id: ORGANIZER_ROLE_ID,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.SendMessages,
             ],
           },
           {
-            id: "1097120206989570199",
+            id: MENTOR_ROLE_ID,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.SendMessages,

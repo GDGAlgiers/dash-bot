@@ -40,7 +40,6 @@ module.exports = {
         }
       )
       .setColor(Colors.Purple)
-      .setThumbnail("https://i.imgur.com/o0CqYoh.png")
 
     await interaction.reply({ embeds: [message] });
   },

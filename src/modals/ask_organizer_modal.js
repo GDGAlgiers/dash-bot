@@ -1,4 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
+require("dotenv").config()
+
+const ORGANIZER_ROLE_ID = process.env.ORGANIZER_ROLE_ID
+const ORGANIZER_CHANNEL_ID = process.env.ORGANIZER_CHANNEL_ID
 
 const askOrganizerModal = async (client, interaction) => {
   await interaction.reply({
@@ -16,9 +20,7 @@ const askOrganizerModal = async (client, interaction) => {
       "organizerDetailsInput"
     );
 
-    const channel = await interaction.guild.channels.fetch(
-      "1125403283700334642"
-    );
+    const channel = await interaction.guild.channels.fetch(ORGANIZER_CHANNEL_ID);
 
     const message = new EmbedBuilder({
       color: 0x0099ff,
@@ -39,7 +41,7 @@ const askOrganizerModal = async (client, interaction) => {
       ],
     });
 
-    channel.send({ content: "<@&1097120206989570199>", embeds: [message] });
+    channel.send({ content: `<@&${ORGANIZER_ROLE_ID}>`, embeds: [message] });
 
     await interaction.editReply({ embeds: [{ title: "Request sent" }] });
   } else {
