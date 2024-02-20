@@ -32,7 +32,7 @@ module.exports = {
         {
           name: "`/remaining_time`",
           value:
-            "Checks the remaining time for the Game Jam until it starts/finishes (depending on when fired)",
+            "Checks the remaining time for the event until it starts/finishes (depending on when fired)",
         },
         {
           name: "`/ping`",
