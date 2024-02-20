@@ -27,10 +27,12 @@ module.exports = {
         {
           name: "Day 3: 20:00-21:00",
           value: "Activity 02",
+          inline: true,
         },
         {
-          name: "Day 3: 00:00",
-          value: "submissions",
+          name: "00:00",
+          value: "Submissions",
+          inline: true,
         }
       );
     interaction.reply({ embeds: [message] });
