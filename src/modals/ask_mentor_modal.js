@@ -10,6 +10,9 @@ const askMentorModal = async (client, interaction) => {
     r.name.startsWith("Team")
   );
 
+  const teamCategory = await interaction.guild.channels.cache.find(c => c.name.toLowerCase() === role.name.toLowerCase())
+  const askHelpChannel = await interaction.guild.channels.cache.find(c => (c.parentId === teamCategory.id && c.name === "ask-help" && c.type === 0))
+
   if (role) {
     const mentorTopic =
       interaction.fields.getTextInputValue("mentorTopicInput");
@@ -25,6 +28,9 @@ const askMentorModal = async (client, interaction) => {
         {
           name: "Team name",
           value: role.toString(),
+        }, {
+          name: "Team channel",
+          value: `<#${askHelpChannel.id}>`
         },
         {
           name: "Topic",

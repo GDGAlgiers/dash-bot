@@ -22,6 +22,10 @@ const askOrganizerModal = async (client, interaction) => {
 
     const channel = await interaction.guild.channels.fetch(ORGANIZER_CHANNEL_ID);
 
+    const teamCategory = await interaction.guild.channels.cache.find(c => c.name.toLowerCase() === role.name.toLowerCase())
+
+    const askHelpChannel = await interaction.guild.channels.cache.find(c => (c.parentId === teamCategory.id && c.name === "ask-help" && c.type === 0))
+
     const message = new EmbedBuilder({
       color: 0x0099ff,
       title: "A team asked for an organizer",
@@ -29,6 +33,10 @@ const askOrganizerModal = async (client, interaction) => {
         {
           name: "Team name",
           value: role.toString(),
+        },
+        {
+          name: "Team channel",
+          value: `<#${askHelpChannel.id}>`
         },
         {
           name: "Topic",
