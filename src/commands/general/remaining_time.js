@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+  disabled: true,
   data: new SlashCommandBuilder()
     .setName("remaining_time")
     .setDescription(

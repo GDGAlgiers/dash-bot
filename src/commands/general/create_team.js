@@ -19,12 +19,12 @@ module.exports = {
         .setDescription("The name of the team")
         .setRequired(true)
     )
-    .addUserOption((option) =>
-      option
-        .setName("member1")
-        .setDescription("First member of the team")
-        .setRequired(false)
-    )
+    // .addUserOption((option) =>
+    //   option
+    //     .setName("member1")
+    //     .setDescription("First member of the team")
+    //     .setRequired(false)
+    // )
     .addUserOption((option) =>
       option
         .setName("member2")
@@ -36,13 +36,13 @@ module.exports = {
         .setName("member3")
         .setDescription("Third member of the team")
         .setRequired(false)
-    )
-    .addUserOption((option) =>
-      option
-        .setName("member4")
-        .setDescription("Fourth member of the team")
-        .setRequired(false)
     ),
+  // .addUserOption((option) =>
+  //   option
+  //     .setName("member4")
+  //     .setDescription("Fourth member of the team")
+  //     .setRequired(false)
+  // ),
   async execute(client, interaction, args) {
     await interaction.reply({
       embeds: [{ title: "Processing team creation" }],
@@ -50,13 +50,13 @@ module.exports = {
     try {
       // Getting all the members of the team
       const teamLeader = interaction.member;
-      const member1 = interaction.options.getMember("member1");
+      // const member1 = interaction.options.getMember("member1");
       const member2 = interaction.options.getMember("member2");
       const member3 = interaction.options.getMember("member3");
-      const member4 = interaction.options.getMember("member4");
+      // const member4 = interaction.options.getMember("member4");
 
       // Filtering the members in case of a team with a size less than 5
-      const members = [teamLeader, member1, member2, member3, member4].filter(
+      const members = [teamLeader, member2, member3].filter(
         (member) => member !== null
       );
 

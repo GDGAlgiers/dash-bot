@@ -2,7 +2,6 @@ const fs = require("fs");
 const Ascii = require("ascii-table");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-
 /**
  * Load commands from file
  * @param {*} client
@@ -26,7 +25,7 @@ function loadCommands(client, token, clientId, guildId) {
     for (const file of commandFiles) {
       const command = require(`../../commands/${folder}/${file}`);
       // check the command
-      if (command.data) {
+      if (command.data && !command.disabled) {
         // add the command to the global list of commands
         client.commands.set(command.data.name, command);
         commands.push(command.data.toJSON());

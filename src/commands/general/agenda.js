@@ -11,28 +11,28 @@ module.exports = {
       .setDescription("Here's the agenda of the event")
       .addFields(
         {
-          name: "Day 1: 18:00-19:00",
+          name: "08:30-09:00",
+          value: "Check in",
+        },
+        {
+          name: "09:00-09:30",
           value: "Opening ceremony",
-          inline: true,
         },
         {
-          name: "20:00",
-          value: "GHack Algiers start",
-          inline: true,
+          name: "09:30-11:00",
+          value: "Setting up the platform",
         },
         {
-          name: "Day 2: 20:00-21:00",
-          value: "Activity 01",
+          name: "11:00-17:00",
+          value: "Competition",
         },
         {
-          name: "Day 3: 20:00-21:00",
-          value: "Activity 02",
-          inline: true,
+          name: "12:00-13:00",
+          value: "Lunch break",
         },
         {
-          name: "00:00",
-          value: "Submissions",
-          inline: true,
+          name: "17:00-18:00",
+          value: "Coffee break and closing ceremony",
         }
       );
     interaction.reply({ embeds: [message] });
