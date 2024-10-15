@@ -17,7 +17,7 @@ module.exports = {
           value: "Displays the event agenda",
         },
         {
-          name: "`/create_team` `<team_name>` `<member2>` `<member3>`",
+          name: "`/create_team` `<team_name>` `<member2>` `<member3>` `<member4>`",
           value:
             "Creates a team space for the team members entered as tags, the members parameters are optionnal",
         },
@@ -29,11 +29,11 @@ module.exports = {
           name: "`ask_organizer`",
           value: "Ask for an organizer by filling a form",
         },
-        // {
-        //   name: "`/remaining_time`",
-        //   value:
-        //     "Checks the remaining time for the event until it starts/finishes (depending on when fired)",
-        // },
+        {
+          name: "`/remaining_time`",
+          value:
+            "Checks the remaining time for the event until it starts/finishes (depending on when fired)",
+        },
         {
           name: "`/ping`",
           value: "Gets the bot's ping",

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
-  disabled: true,
+  disabled: false,
   data: new SlashCommandBuilder()
     .setName("remaining_time")
     .setDescription(
@@ -16,8 +16,8 @@ module.exports = {
       ],
     });
 
-    const startDate = new Date(2024, 1, 21, 19, 0);
-    const endDate = new Date(2024, 1, 24, 0, 0);
+    const startDate = new Date(2024, 9, 17, 19, 0);
+    const endDate = new Date(2024, 9, 20, 0, 0);
     const currentDate = new Date();
     const message = new EmbedBuilder();
 

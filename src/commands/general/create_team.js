@@ -36,6 +36,12 @@ module.exports = {
         .setName("member3")
         .setDescription("Third member of the team")
         .setRequired(false)
+    )
+    .addUserOption((option) =>
+      option
+        .setName("member4")
+        .setDescription("Fourth member of the team")
+        .setRequired(false)
     ),
   // .addUserOption((option) =>
   //   option
@@ -53,10 +59,11 @@ module.exports = {
       // const member1 = interaction.options.getMember("member1");
       const member2 = interaction.options.getMember("member2");
       const member3 = interaction.options.getMember("member3");
+      const member4 = interaction.options.getMember("member4");
       // const member4 = interaction.options.getMember("member4");
 
       // Filtering the members in case of a team with a size less than 5
-      const members = [teamLeader, member2, member3].filter(
+      const members = [teamLeader, member2, member3, member4].filter(
         (member) => member !== null
       );
 
