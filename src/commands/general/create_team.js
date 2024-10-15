@@ -27,6 +27,12 @@ module.exports = {
     // )
     .addUserOption((option) =>
       option
+        .setName("member1")
+        .setDescription("First member of the team")
+        .setRequired(false)
+    )
+    .addUserOption((option) =>
+      option
         .setName("member2")
         .setDescription("Second member of the team")
         .setRequired(false)
@@ -50,20 +56,32 @@ module.exports = {
   //     .setRequired(false)
   // ),
   async execute(client, interaction, args) {
+    const adminRole = interaction.member.roles.cache.find((r) =>
+      r.name.startsWith("Admin")
+    );
+    const organizersRole = interaction.member.roles.cache.find((r) =>
+      r.name === "Organizer"
+    );
+    
+    // Check if either role is found
+    if (adminRole || organizersRole) {
+    
+      await interaction.reply({ embeds: [{ title: "Only Orgenizers can create teams" }] });
+      return;
+    }
     await interaction.reply({
       embeds: [{ title: "Processing team creation" }],
     });
     try {
       // Getting all the members of the team
-      const teamLeader = interaction.member;
-      // const member1 = interaction.options.getMember("member1");
+      const member1 = interaction.options.getMember("member1");
       const member2 = interaction.options.getMember("member2");
       const member3 = interaction.options.getMember("member3");
       const member4 = interaction.options.getMember("member4");
       // const member4 = interaction.options.getMember("member4");
 
       // Filtering the members in case of a team with a size less than 5
-      const members = [teamLeader, member2, member3, member4].filter(
+      const members = [member1, member2, member3, member4].filter(
         (member) => member !== null
       );
 
