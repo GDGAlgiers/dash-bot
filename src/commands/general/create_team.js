@@ -19,12 +19,6 @@ module.exports = {
         .setDescription("The name of the team")
         .setRequired(true)
     )
-    // .addUserOption((option) =>
-    //   option
-    //     .setName("member1")
-    //     .setDescription("First member of the team")
-    //     .setRequired(false)
-    // )
     .addUserOption((option) =>
       option
         .setName("member1")
@@ -64,7 +58,7 @@ module.exports = {
     );
     
     // Check if either role is found
-    if (adminRole || organizersRole) {
+    if (!adminRole && !organizersRole) {
     
       await interaction.reply({ embeds: [{ title: "Only Orgenizers can create teams" }] });
       return;
