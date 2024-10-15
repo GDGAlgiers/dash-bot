@@ -2,6 +2,7 @@
 const { Client, Collection, GatewayIntentBits, Events } = require("discord.js");
 const { loadCommands } = require("./core/loader/index");
 const { modalsHandler } = require("./core/modals_handler");
+const { createServer } = require("./utils/server")
 require("dotenv").config();
 
 const clientId = process.env.CLIENT_ID;
@@ -44,3 +45,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 // Login to Discord with your client's token
 client.login(token);
+createServer()
