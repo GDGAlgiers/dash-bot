@@ -15,20 +15,16 @@ module.exports = {
           value: "Opening ceremony",
         },
         {
-          name: "Day 1: 20:00",
-          value: "DevFest Algiers start",
+          name: "Day 1: 19:00-20:00",
+          value: "Challenge Selection and Hackathon Start",
         },
         {
-          name: "Day 2: 20:00-21:00",
-          value: "Activity 01",
-        },
-        {
-          name: "Day 3: 20:00-21:00",
-          value: "Activity 02",
+          name: "Day 3: 23:00",
+          value: "Hacking Phase Ends, Submissions Open",
         },
         {
           name: "Day 3: 00:00",
-          value: "submissions",
+          value: "Submission Deadline",
         }
       );
     interaction.reply({ embeds: [message] });
