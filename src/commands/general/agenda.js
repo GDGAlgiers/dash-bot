@@ -23,7 +23,7 @@ module.exports = {
           value: "Hacking Phase Ends, Submissions Open",
         },
         {
-          name: "Day 3: 00:00",
+          name: "Day 3: 23:59",
           value: "Submission Deadline",
         }
       );
